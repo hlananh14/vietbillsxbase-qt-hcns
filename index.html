@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quy trình bổ sung — Tuyển dụng & Mua/cấp phát tài sản</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1e3a5f;
+    --ink:#0f172a;
+    --muted:#64748b;
+    --line:#e5e9f0;
+    --pink-bg:#fde3e2;
+    --pink-ink:#b3261e;
+    --green-bg:#d9f2e3;
+    --green-ink:#1a7f4e;
+    --slate-bg:#e3e8f0;
+    --slate-ink:#334155;
+    --arrow:#9aa7b4;
+    --track:#e8ecf2;
+    --nav-btn:#47546380;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Inter',system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    background:#f7f8fa;
+    color:var(--ink);
+    padding:28px 20px 60px;
+  }
+  .page{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:40px;}
+
+  /* ===== QT block (giống cấu trúc QT7 trong ảnh mẫu) ===== */
+  .qt-block{background:#fff;border-radius:16px;padding:22px 20px 26px;}
+  .qt-head{display:flex;align-items:center;gap:12px;margin-bottom:6px;flex-wrap:wrap;}
+  .qt-title{font-size:20px;font-weight:800;color:var(--ink);margin:0;}
+  .qt-sub{font-size:13.5px;color:var(--muted);margin:0 0 18px;}
+
+  .qt-row-wrap{position:relative;}
+  .qt-row{
+    display:flex;align-items:stretch;gap:0;
+    overflow-x:auto;scroll-behavior:smooth;padding:4px 2px 14px;
+    scrollbar-width:none;-ms-overflow-style:none;
+  }
+  .qt-row::-webkit-scrollbar{display:none;}
+
+  .qt-step{
+    flex:0 0 auto;width:182px;min-height:88px;border-radius:14px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:10px 14px;margin:0 2px;
+  }
+  .qt-step .t{font-weight:700;font-size:14.5px;line-height:1.3;margin-bottom:4px;}
+  .qt-step .s{font-size:12px;color:var(--muted);line-height:1.35;}
+
+  .qt-step.pink{background:var(--pink-bg);}
+  .qt-step.pink .t{color:var(--pink-ink);}
+  .qt-step.green{background:var(--green-bg);}
+  .qt-step.green .t{color:var(--green-ink);}
+  .qt-step.slate{background:var(--slate-bg);}
+  .qt-step.slate .t{color:var(--slate-ink);}
+
+  .qt-arrow{
+    flex:0 0 32px;display:flex;align-items:center;justify-content:center;
+    color:var(--arrow);font-size:18px;
+  }
+
+  .qt-scrollbar{
+    display:flex;align-items:center;gap:8px;margin-top:2px;
+  }
+  .qt-track{flex:1;height:7px;background:var(--track);border-radius:999px;}
+  .qt-nav{
+    flex:0 0 auto;width:26px;height:26px;border-radius:999px;border:none;
+    background:#5b6b7f;color:#fff;font-size:13px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .qt-nav:hover{background:#44515f;}
+
+  .qt-legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:16px;font-size:12px;color:var(--muted);}
+  .qt-legend span{display:inline-flex;align-items:center;gap:6px;}
+  .dot{width:10px;height:10px;border-radius:3px;display:inline-block;}
+  .dot.pink{background:var(--pink-bg);border:1px solid var(--pink-ink);}
+  .dot.green{background:var(--green-bg);border:1px solid var(--green-ink);}
+  .dot.slate{background:var(--slate-bg);border:1px solid var(--slate-ink);}
+
+  @media (max-width:640px){
+    .qt-title{font-size:17px;}
+    .qt-step{width:156px;min-height:80px;}
+  }
+
+  /* ===== Hero / page header (giống đầu trang vietbills.vercel.app) ===== */
+  .hero{
+    background:linear-gradient(135deg,#ffffff 0%,#eef2f9 100%);
+    padding:36px 20px 30px;
+    margin:-28px -20px 0;
+  }
+  .hero-inner{max-width:1100px;margin:0 auto;}
+  .brand{display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .brand-badge{
+    width:36px;height:36px;border-radius:10px;background:var(--navy);
+    color:#fff;font-weight:800;font-size:14px;
+    display:flex;align-items:center;justify-content:center;flex:0 0 auto;
+  }
+  .brand-name{
+    color:var(--navy);font-weight:800;font-size:13px;letter-spacing:.6px;
+    text-transform:uppercase;
+  }
+  .hero h1{
+    font-size:34px;font-weight:800;color:var(--ink);margin:0 0 16px;line-height:1.25;
+  }
+  .hero p{
+    font-size:15px;color:var(--muted);line-height:1.65;max-width:760px;margin:0;
+  }
+  @media (max-width:640px){
+    .hero h1{font-size:24px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="brand">
+      <span class="brand-badge">VB</span>
+      <span class="brand-name">Vietbills Logistics</span>
+    </div>
+    <h1>Sơ đồ vận hành &amp; giải pháp thiết lập hệ thống</h1>
+    <p>Toàn cảnh các trục vận hành chính của doanh nghiệp và các quy trình sẽ được thiết lập trên hệ thống. Mỗi quy trình đọc theo chiều ngang; tại điểm rẽ nhánh, bấm vào thẻ nhánh để làm sáng đúng luồng xử lý — các nhánh còn lại vẫn hiển thị mờ để giữ góc nhìn tổng quan.</p>
+  </div>
+</header>
+
+<div class="page">
+
+  <!-- ============== Tuyển dụng nhân sự mới ============== -->
+  <section class="qt-block" id="qt8">
+    <div class="qt-head">
+      <h2 class="qt-title">Tuyển dụng nhân sự mới</h2>
+    </div>
+    <p class="qt-sub">Quy trình nhân sự: từ đề xuất tuyển dụng đến tiếp nhận nhân sự mới, không có nhánh rẽ phức tạp.</p>
+
+    <div class="qt-row-wrap">
+      <div class="qt-row" id="row-qt8">
+        <div class="qt-step pink"><div class="t">Đề xuất tuyển dụng</div><div class="s">Phòng/ban có nhu cầu</div></div>
+        <div class="qt-arrow">→</div>
+        <div class="qt-step green"><div class="t">Phê duyệt</div><div class="s">Ban lãnh đạo</div></div>
+        <div class="qt-arrow">→</div>
+        <div class="qt-step pink"><div class="t">Tìm ứng viên</div><div class="s">HCNS · phối hợp phòng/ban</div></div>
+        <div class="qt-arrow">→</div>
+        <div class="qt-step green"><div class="t">Duyệt hồ sơ</div><div class="s">Trưởng bộ phận</div></div>
+        <div class="qt-arrow">→</div>
+        <div class="qt-step pink"><div class="t">Phỏng vấn</div><div class="s">HCNS · Trưởng bộ phận</div></div>
+        <div class="qt-arrow">→</div>
+        <div class="qt-step pink"><div class="t">Trình duyệt</div><div class="s">HCNS</div></div>
+        <div class="qt-arrow">→</div>
+        <div class="qt-step green"><div class="t">Phê duyệt</div><div class="s">Ban lãnh đạo</div></div>
+        <div class="qt-arrow">→</div>
+        <div class="qt-step slate"><div class="t">Tiếp nhận</div><div class="s">HCNS</div></div>
+      </div>
+      <div class="qt-scrollbar">
+        <button class="qt-nav" onclick="scrollRow('row-qt8',-1)">‹</button>
+        <div class="qt-track"></div>
+        <button class="qt-nav" onclick="scrollRow('row-qt8',1)">›</button>
+      </div>
+    </div>
+
+    <div class="qt-legend">
+      <span><i class="dot pink"></i>Thao tác</span>
+      <span><i class="dot green"></i>Duyệt / phê duyệt</span>
+      <span><i class="dot slate"></i>Kết thúc</span>
+    </div>
+  </section>
+
+  <!-- ============== Mua / cấp phát tài sản giá trị ============== -->
+  <section class="qt-block" id="qt9">
+    <div class="qt-head">
+      <h2 class="qt-title">Mua / cấp phát tài sản giá trị</h2>
+    </div>
+    <p class="qt-sub">Quy trình hành chính: từ đề xuất đến mua và cấp phát tài sản cho nhân sự.</p>
+
+    <div class="qt-row-wrap">
+      <div class="qt-row" id="row-qt9">
+        <div class="qt-step pink"><div class="t">Đề xuất</div><div class="s">Nhân sự</div></div>
+        <div class="qt-arrow">→</div>
+        <div class="qt-step green"><div class="t">Duyệt</div><div class="s">Trưởng bộ phận</div></div>
+        <div class="qt-arrow">→</div>
+        <div class="qt-step pink"><div class="t">Gửi Hành chính</div><div class="s">Nhân sự</div></div>
+        <div class="qt-arrow">→</div>
+        <div class="qt-step pink"><div class="t">Trình duyệt</div><div class="s">Hành chính</div></div>
+        <div class="qt-arrow">→</div>
+        <div class="qt-step green"><div class="t">Phê duyệt</div><div class="s">Ban lãnh đạo</div></div>
+        <div class="qt-arrow">→</div>
+        <div class="qt-step slate"><div class="t">Mua, cấp phát</div><div class="s">Hành chính</div></div>
+      </div>
+      <div class="qt-scrollbar">
+        <button class="qt-nav" onclick="scrollRow('row-qt9',-1)">‹</button>
+        <div class="qt-track"></div>
+        <button class="qt-nav" onclick="scrollRow('row-qt9',1)">›</button>
+      </div>
+    </div>
+
+    <div class="qt-legend">
+      <span><i class="dot pink"></i>Thao tác</span>
+      <span><i class="dot green"></i>Duyệt / phê duyệt</span>
+      <span><i class="dot slate"></i>Kết thúc</span>
+    </div>
+  </section>
+
+  <!-- ============== Kiểm soát công văn, giấy tờ, hợp đồng đi và đến ============== -->
+  <section class="qt-block" id="qt10">
+    <div class="qt-head">
+      <h2 class="qt-title">Kiểm soát công văn, giấy tờ, hợp đồng đi và đến</h2>
+    </div>
+    <p class="qt-sub">Quy trình hành chính: kiểm soát hợp đồng/công văn gửi đến và trả lại sau khi ký duyệt, không có nhánh rẽ phức tạp.</p>
+
+    <div class="qt-row-wrap">
+      <div class="qt-row" id="row-qt10">
+        <div class="qt-step pink"><div class="t">Gửi hợp đồng</div><div class="s">Sales / cá nhân liên quan</div></div>
+        <div class="qt-arrow">→</div>
+        <div class="qt-step pink"><div class="t">Tiếp nhận, kiểm tra</div><div class="s">Hành chính</div></div>
+        <div class="qt-arrow">→</div>
+        <div class="qt-step green"><div class="t">Ký duyệt</div><div class="s">Ban lãnh đạo</div></div>
+        <div class="qt-arrow">→</div>
+        <div class="qt-step slate"><div class="t">Trả hợp đồng</div><div class="s">Hành chính · lưu bản lưu</div></div>
+      </div>
+      <div class="qt-scrollbar">
+        <button class="qt-nav" onclick="scrollRow('row-qt10',-1)">‹</button>
+        <div class="qt-track"></div>
+        <button class="qt-nav" onclick="scrollRow('row-qt10',1)">›</button>
+      </div>
+    </div>
+
+    <div class="qt-legend">
+      <span><i class="dot pink"></i>Thao tác</span>
+      <span><i class="dot green"></i>Duyệt / phê duyệt</span>
+      <span><i class="dot slate"></i>Kết thúc</span>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  function scrollRow(id, dir){
+    var el = document.getElementById(id);
+    el.scrollBy({left: dir * 220, behavior: 'smooth'});
+  }
+</script>
+</body>
+</html>
